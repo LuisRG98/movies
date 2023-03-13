@@ -65,6 +65,9 @@ class _PostAndTitle extends StatelessWidget {
               image: AssetImage('assets/img/loading.gif'),
               height: 150,
             ),
+          ),
+          SizedBox(
+            width: 20,
           )
         ],
       ),

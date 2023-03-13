@@ -1,6 +1,6 @@
 # movies
 
-A new Flutter project.
+Movie applpication, with a conection to a public API
 
 ## Getting Started
 

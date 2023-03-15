@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/widgets.dart';
+
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({Key? key}) : super(key: key);
 
@@ -15,6 +17,8 @@ class DetailsScreen extends StatelessWidget {
           SliverList(
               delegate: SliverChildListDelegate([
             _PostAndTitle(),
+            _OverVIew(),
+            CastingCards(),
           ])),
         ],
       ),
@@ -53,6 +57,7 @@ class _CustomAppBar extends StatelessWidget {
 class _PostAndTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Container(
       margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -66,11 +71,53 @@ class _PostAndTitle extends StatelessWidget {
               height: 150,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
+          ),
+          Column(
+            children: [
+              Text(
+                'movie.title',
+                style: textTheme.headlineSmall,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              Text(
+                'movie.title',
+                style: textTheme.headlineSmall,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.star_border,
+                    size: 16,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    'movia avarage',
+                    style: textTheme.caption,
+                  )
+                ],
+              )
+            ],
           )
         ],
       ),
+    );
+  }
+}
+
+class _OverVIew extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: Text('afsdfa'),
     );
   }
 }

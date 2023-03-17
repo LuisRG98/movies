@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../models/models .dart';
+
 class MovieSlider extends StatelessWidget {
-  const MovieSlider({super.key});
+  final List<Movie> movies;
+  const MovieSlider({super.key, required this.movies});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 260,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

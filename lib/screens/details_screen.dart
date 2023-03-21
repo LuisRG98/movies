@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../models/models.dart';
 import '../widgets/widgets.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -7,16 +8,15 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String movie =
-        ModalRoute.of(context)?.settings.arguments.toString() ?? 'no-movie';
+    final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
 
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          _CustomAppBar(),
+          _CustomAppBar(movie: movie),
           SliverList(
               delegate: SliverChildListDelegate([
-            _PostAndTitle(),
+            _PostAndTitle(movie: movie),
             _OverVIew(),
             CastingCards(),
           ])),
@@ -27,6 +27,9 @@ class DetailsScreen extends StatelessWidget {
 }
 
 class _CustomAppBar extends StatelessWidget {
+  final Movie movie;
+
+  const _CustomAppBar({super.key, required this.movie});
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -38,14 +41,14 @@ class _CustomAppBar extends StatelessWidget {
         title: Container(
           width: double.infinity,
           alignment: Alignment.bottomCenter,
-          child: const Text(
-            'title',
-            style: TextStyle(fontSize: 16),
+          child: Text(
+            movie.title,
+            style: const TextStyle(fontSize: 16),
           ),
         ),
-        background: const FadeInImage(
-          placeholder: AssetImage('assets/img/loading.gif'),
-          image: AssetImage('assets/img/loading.gif'),
+        background: FadeInImage(
+          placeholder: const AssetImage('assets/img/loading.gif'),
+          image: NetworkImage(movie.fullBackdropPath),
           fit: BoxFit.cover,
         ),
       ),
@@ -55,6 +58,9 @@ class _CustomAppBar extends StatelessWidget {
 }
 
 class _PostAndTitle extends StatelessWidget {
+  final Movie movie;
+
+  const _PostAndTitle({required this.movie});
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -77,14 +83,14 @@ class _PostAndTitle extends StatelessWidget {
           Column(
             children: [
               Text(
-                'movie.title',
-                style: textTheme.headlineSmall,
+                movie.title,
+                style: textTheme.headline5,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
               Text(
-                'movie.title',
-                style: textTheme.headlineSmall,
+                movie.originalTitle,
+                style: textTheme.subtitle1,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
@@ -99,7 +105,7 @@ class _PostAndTitle extends StatelessWidget {
                     width: 5,
                   ),
                   Text(
-                    'movia avarage',
+                    '${movie.voteAverage}',
                     style: textTheme.caption,
                   )
                 ],

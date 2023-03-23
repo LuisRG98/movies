@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:movies/providers/movie_provider.dart';
 import 'package:movies/screens/screens.dart';
 import 'package:provider/provider.dart';
+
+
 
 void main() => runApp(const AppState());
 

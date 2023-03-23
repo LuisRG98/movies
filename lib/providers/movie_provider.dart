@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:movies/models/models.dart';
+import 'package:movies/models/search_response.dart';
 
 class MovieProvider extends ChangeNotifier {
   final _baseUrl = 'api.themoviedb.org';
@@ -55,5 +56,13 @@ class MovieProvider extends ChangeNotifier {
     moviesCast[movieId] = creditsResponse.cast;
 
     return creditsResponse.cast;
+  }
+
+  Future<List> searchMovie(String query) async {
+    var url = Uri.https(_baseUrl, '3/search/movie',
+        {'api_key': _apiKey, 'language': _language, 'query': query});
+    final response = await http.get(url);
+    final searchResponse = SearchResponse.fromJson(response.body);
+    return searchResponse.results;
   }
 }
